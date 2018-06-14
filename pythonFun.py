@@ -53,15 +53,12 @@ class App(QWidget):
         else:
             button.setText("O")
             self.oClickedPosition.append(button.getId())
-        button.setDisabled(True)
+        button.clicked.disconnect()
         self.xTurn = not self.xTurn
         for position in self.winPosition:
             if set(position).issubset(set(self.xClickedPosition)) or set(position).issubset(set(self.oClickedPosition)):
                 for button in self.buttons:
-                    if button.getId() in position:
-                        button.setDisabled(False)
-                        button.clicked.disconnect()
-                    else:
+                    if button.getId() not in position:
                         button.setDisabled(True)
             
 if __name__ == '__main__':
